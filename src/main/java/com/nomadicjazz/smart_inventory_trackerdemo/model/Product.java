@@ -3,6 +3,10 @@ package com.nomadicjazz.smart_inventory_trackerdemo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+
 
 @Entity
 public class Product {
@@ -11,10 +15,14 @@ public class Product {
     private Long id;
 
     @NotBlank
+    @Size(min = 2, max = 100)
     private String name;
 
+    @NotNull
+    @Size(min = 2, max = 50)
     private String category;
 
+    @NotNull
     @Positive
     private int quantity;
 

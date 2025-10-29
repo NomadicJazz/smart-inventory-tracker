@@ -2,6 +2,7 @@ package com.nomadicjazz.smart_inventory_trackerdemo.controller;
 
 import com.nomadicjazz.smart_inventory_trackerdemo.model.Product;
 import com.nomadicjazz.smart_inventory_trackerdemo.repository.ProductRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ProductController {
 
     // --- Create a product ---
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
         Product savedProduct = repository.save(product);
         return ResponseEntity.ok(savedProduct);
     }
@@ -38,7 +39,7 @@ public class ProductController {
 
     // get a product by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id){
+    public ResponseEntity<Product> getProductById(@Valid @PathVariable Long id){
         Optional<Product> product = repository.findById(id);
         return product.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -46,7 +47,7 @@ public class ProductController {
 
     // Update an existing product
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product productDetails) {
         Optional<Product> existingProduct = repository.findById(id);
 
         if (existingProduct.isPresent()) {
