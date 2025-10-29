@@ -14,20 +14,22 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be empty")
     @Size(min = 2, max = 100)
     private String name;
 
-    @NotNull
+    @NotBlank(message = "Category cannot be empty")
     @Size(min = 2, max = 50)
     private String category;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be greater than zero")
     private int quantity;
 
     private String description;
 
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be greater than zero")
     private double price;
 
     public Product() {
