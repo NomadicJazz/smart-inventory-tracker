@@ -62,4 +62,16 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    // DELETE product by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        Optional<Product> existingProduct = repository.findById(id);
+
+        if (existingProduct.isPresent()){
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
