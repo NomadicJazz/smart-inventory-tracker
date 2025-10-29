@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(errors);
     }
-    
+
     // Handle all other exceptions
     public ResponseEntity<String> handleOtherExceptions(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
