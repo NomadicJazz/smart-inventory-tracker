@@ -24,7 +24,7 @@ public class Product {
 
     @NotNull(message = "Quantity is required")
     @Positive(message = "Quantity must be greater than zero")
-    private int quantity;
+    private Integer quantity;
 
     private String description;
 
@@ -32,16 +32,25 @@ public class Product {
     @Positive(message = "Price must be greater than zero")
     private double price;
 
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be greater than zero")
+    private Integer reorderLevel;
+
+    @NotNull(message = "Supplier ID must not be null")
+    private Long supplierId;
+
     public Product() {
 
     }
 
-    public Product(String name, String category,String description, int quantity, double price) {
+    public Product(String name, String category,String description, int quantity, double price, Integer reorderLevel, Long supplierId) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.reorderLevel = reorderLevel;
+        this.supplierId = supplierId;
 
 
     }
@@ -63,6 +72,17 @@ public class Product {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    public Integer getReorderLevel() {return reorderLevel; }
+    public void setReorderLevel(Integer reorderLevel){this.reorderLevel = reorderLevel;}
+
+    public Long getSupplierId() {return supplierId;}
+    public void setSupplierId(Long supplierId) {this.supplierId = supplierId;}
+
+    // --- Helper method ---
+    public boolean isLowStock() {
+        return quantity != null && reorderLevel != null && quantity < reorderLevel;
+    }
 
     @Override
     public String toString() {
